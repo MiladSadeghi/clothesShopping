@@ -25,6 +25,8 @@ body {
 header {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
 }
 
 .container {
@@ -32,41 +34,41 @@ header {
   margin: 0 auto;
 }
 
-header nav {
+header nav .nav-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px 0;
 }
 
-header nav .logo img{
+header .nav-content .logo img{
   border-radius: 50%;
 }
 
-header nav .buy-menu {
-  position: relative;
-}
-
-header nav .buy-menu i {
+header .nav-content .buy-menu i {
   font-size: 1.4rem;
   color: #3c6382;
   cursor: pointer;
 }
 
-.shopping-cart {
+.submenu {
+  position: relative;
+}
+
+.submenu .shopping-cart {
   display: none;
 }
 
-
-header nav .buy-menu i:hover ~ .shopping-cart {
-  position: absolute;
-  right: 0;
-  top: 40px;
-  height: 300px;
-  background: rgb(255, 255, 255);
-  display: block;
-  align-items: center;
-  text-align: center;
+.submenu:hover .shopping-cart {
+display: block;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    z-index: 1;
+    background-color: white;
+    padding: 20px;
+    min-height: 400px;
+    min-width: 300px;
 }
 
 #cart-content {
@@ -82,12 +84,47 @@ header nav .buy-menu i:hover ~ .shopping-cart {
   padding: 12px 15px;
 } 
 
-header nav .buy-menu .shopping-cart a {
+header .nav-content .buy-menu .shopping-cart a {
   padding: 10px 106px;
   border: 1px solid #000;
   color: #000;
   text-transform: uppercase;
   border-radius: 8px;
+}
+
+header .hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 570px;
+}
+
+header .hero img{
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 94px;
+  left: 0px;
+  z-index: -1;
+  filter: blur(5px);
+}
+
+header .hero h1 {
+  color: #fff;
+  font-size: 3rem;
+  text-shadow: 4px 2px 2px #000;
+  line-height: 100px;
+}
+
+header .hero h4 {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-shadow: 2px 2px 2px #000;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -112,11 +149,20 @@ header nav .buy-menu .shopping-cart a {
   .container {
     width: 700px;
   }
+  header .hero h1 {
+    font-size: 2.5rem;
+  }
 }
 
 @media only screen and (max-width: 600px) {
   .container {
     width: 540px;
+  }
+  header .hero h1 {
+    font-size: 2rem;
+  }
+  header .hero h4 {
+    font-size: 1.4rem;
   }
 }
 
@@ -124,15 +170,29 @@ header nav .buy-menu .shopping-cart a {
   .container {
     width: 420px;
   }
+  header .hero h1 {
+    font-size: 1.6rem;
+  }
+  header .nav-content .logo img {
+    width: 60px;
+  }
+  header .hero h4 {
+    font-size: 1.3rem;
+  }
 }
 
 @media only screen and (max-width: 425px) {
   .container {
     width: 350px;
   }
-  header nav .buy-menu i:hover ~ .shopping-cart {
-    right: 50%;
-    top: 70px;
+  .submenu:hover .shopping-cart {
+    right: 0;
+  }
+  header .hero h1 {
+    font-size: 1.4rem;
+  }
+  header .hero h4 {
+    font-size: 1.2rem;
   }
 }
 
@@ -144,29 +204,52 @@ header nav .buy-menu .shopping-cart a {
   .container {
     width: 330px;
   }
+  .submenu:hover .shopping-cart {
+    right: -17%;
+    padding: 13px;
+  }
+  header .hero h1 {
+    font-size: 1.2rem;
+  }
 }
 
 @media only screen and (max-width: 350px) {
   .container {
     width: 320px;
   }
+
 }
 
 @media only screen and (max-width: 320px) {
   .container {
     width: 270px;
   }
-  header nav .buy-menu i:hover ~ .shopping-cart {
-    right: 20%;
-    top: 70px;
+  .submenu:hover .shopping-cart {
+    right: -17%;
+    padding: 5px;
+    min-width: 280px;
+  }
+  header .nav-content .buy-menu .shopping-cart a {
+    padding: 10px 96px;
   }
   #cart-content {
-    min-width: 251px;
+    min-width: 280px; 
   }
-  header nav .buy-menu .shopping-cart a {
-    padding: 10px 82px;
+  header .hero h1 {
+    font-size: 1.1rem;
   }
 }
 
 @media only screen and (max-width: 300px) {
+  .submenu:hover .shopping-cart {
+    right: -3%;
+    padding: 5px;
+    min-width: 271px;
+  }
+  #cart-content {
+    min-width: 257px; 
+  }
+  header .nav-content .buy-menu .shopping-cart a {
+    padding: 10px 87px;
+  }
 }
