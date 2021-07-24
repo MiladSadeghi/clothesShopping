@@ -33,10 +33,19 @@ function clothInfo(cInfo) {
     id: cInfo.querySelector('a').getAttribute('data-id')
   }
   addToCard(cloth)
-  addToLocalStorage(cloth)
 }
 
 function addToCard(cInfo) {
+  try {
+    const getFromLS = getFromLocalStorage()
+    getFromLS.forEach(function(e) {
+      if(e.id === cInfo.id) {
+        throw false
+      }
+    });
+  } catch (error) {
+    return false
+  }
   let row = document.createElement('tr')
   row.innerHTML = `
   <tr>
@@ -51,6 +60,7 @@ function addToCard(cInfo) {
   </tr>
   `
   shoppingCardContent.appendChild(row)
+  addToLocalStorage(cInfo)
   showDeleteTable.style.display = 'block'
 }
 
@@ -69,6 +79,7 @@ function clearCart() {
   while (shoppingCardContent.firstChild) {
     shoppingCardContent.firstChild.remove()
   }
+  localStorage.clear()
 }
 
 function addToLocalStorage(clothes) {
