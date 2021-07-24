@@ -3,7 +3,7 @@
 
   &#xa0;
 
-  <a href="https://miladsadeghi.github.io/shoppingCard/">Demo</a>
+  <a href="https://miladsadeghi.github.io/clothesShopping/">Demo</a>
 </div>
 
 <h1 align="center">clothes Shopping</h1>
