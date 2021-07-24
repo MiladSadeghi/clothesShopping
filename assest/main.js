@@ -2,11 +2,16 @@
 const clothes = document.querySelector('#shopping-cart')
       shoppingCardContent = document.querySelector('#cart-content tbody')
       showDeleteTable = document.querySelector('.Delete')
+      clearCardBtn = document.querySelector('#clear-cart')
 
 // eventListeners
 evenetListeners()
 function evenetListeners() {
   clothes.addEventListener('click', buyCloth)
+
+  clearCardBtn.addEventListener('click', clearCart)
+
+  shoppingCardContent.addEventListener('click', removeCloth)
 }
 
 // functions
@@ -42,7 +47,22 @@ function addToCard(cInfo) {
     </td>
   </tr>
   `
-  showDeleteTable.style.display = 'block'
   shoppingCardContent.appendChild(row)
-  console.log(row);
+  showDeleteTable.style.display = 'block'
+}
+
+function removeCloth(e) {
+  e.preventDefault()
+  let cloth,clothId;
+  if(e.target.classList.contains('remove')) {
+    e.target.parentElement.parentElement.remove()
+    cloth = e.target.parentElement.parentElement
+    clothId = cloth.querySelector('a').getAttribute('data-id')
+  }
+}
+
+function clearCart() {
+  while (shoppingCardContent.firstChild) {
+    shoppingCardContent.firstChild.remove()
+  }
 }
