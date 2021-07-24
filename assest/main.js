@@ -12,6 +12,8 @@ function evenetListeners() {
   clearCardBtn.addEventListener('click', clearCart)
 
   shoppingCardContent.addEventListener('click', removeCloth)
+
+  document.addEventListener('DOMContentLoaded', showDOMContentLoaded)
 }
 
 // functions
@@ -31,6 +33,7 @@ function clothInfo(cInfo) {
     id: cInfo.querySelector('a').getAttribute('data-id')
   }
   addToCard(cloth)
+  addToLocalStorage(cloth)
 }
 
 function addToCard(cInfo) {
@@ -59,10 +62,63 @@ function removeCloth(e) {
     cloth = e.target.parentElement.parentElement
     clothId = cloth.querySelector('a').getAttribute('data-id')
   }
+  removeFromLS(clothId)
 }
 
 function clearCart() {
   while (shoppingCardContent.firstChild) {
     shoppingCardContent.firstChild.remove()
   }
+}
+
+function addToLocalStorage(clothes) {
+  let cloth = getFromLocalStorage()
+
+  cloth.push(clothes)
+
+  localStorage.setItem('clothes', JSON.stringify(cloth))
+}
+
+function getFromLocalStorage() {
+  let cloth;
+
+  if (localStorage.getItem('clothes')) {
+    cloth = JSON.parse(localStorage.getItem('clothes'))
+  } else {
+    cloth = []
+  }
+  return cloth
+}
+
+function showDOMContentLoaded() {
+  let = getFromLocalStorage()
+
+  let.forEach(function(cInfo) {
+    let row = document.createElement('tr')
+    row.innerHTML = `
+    <tr>
+      <td>
+        <img src=${cInfo.image} width="70px">
+      </td>
+      <td>${cInfo.title}</td>
+      <td>${cInfo.price}</td>
+      <td>
+        <a href="#" class="remove" data-id="${cInfo.id}">X</a>
+      </td>
+    </tr>
+    `
+    shoppingCardContent.appendChild(row)
+    showDeleteTable.style.display = 'block'
+  });
+}
+
+function removeFromLS(id) {
+  let clothes = getFromLocalStorage()
+
+  clothes.forEach(function(e, index) {
+    if (e.id === id) {
+      clothes.splice(index, 1)
+    }
+  localStorage.setItem('clothes', JSON.stringify(clothes))
+  });
 }
